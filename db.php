@@ -1,14 +1,13 @@
 <?php
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-$host = 'MySQL-8.0';
-$user = 'root';
-$password = '';
+$host = 'MySQL-8.0'; // Имя модуля в OSPanel 6.x
+$user = 'root';      
+$password = '';      
 $dbname = 'students_db.';
 
-try {
-    $conn = new mysqli($host, $user, $password, $dbname);
-    $conn->set_charset('utf8mb4');
-} catch (mysqli_sql_exception $e) {
-    exit('Ошибка подключения к БД: ' . $e->getMessage());
+$conn = new mysqli($host, $user, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Ошибка подключения к БД: " . $conn->connect_error);
 }
+$conn->set_charset("utf8");
+?>
